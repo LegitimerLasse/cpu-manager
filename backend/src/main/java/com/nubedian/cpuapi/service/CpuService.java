@@ -8,6 +8,7 @@ import com.nubedian.cpuapi.entity.Socket;
 import com.nubedian.cpuapi.repository.CpuRepository;
 import com.nubedian.cpuapi.repository.SocketRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +42,10 @@ public class CpuService {
     public CpuDetailDto update(Long id, CpuUpdateRequest req) {
         Cpu cpu = cpuRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("CPU not found: " + id));
+
+        if (!cpu.getVersion().equals(req.version())) {
+            throw new ObjectOptimisticLockingFailureException(Cpu.class, id);
+        }
 
         Socket socket = socketRepository.findById(req.socketId())
                 .orElseThrow(() -> new EntityNotFoundException("Socket not found: " + req.socketId()));
