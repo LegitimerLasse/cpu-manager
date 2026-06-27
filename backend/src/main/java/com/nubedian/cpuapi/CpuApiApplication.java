@@ -1,4 +1,4 @@
-package com.nudebdian.cpuapi;
+package com.nubedian.cpuapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

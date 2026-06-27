@@ -1,4 +1,4 @@
-package com.nudebdian.cpuapi;
+package com.nubedian.cpuapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
